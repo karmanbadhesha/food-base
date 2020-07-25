@@ -43,6 +43,7 @@ class Display extends Component {
         });
     }
 
+    //finds type of search and makes appropriate call
     search() {
         console.log(this.state.search);
         let url = "";
@@ -66,17 +67,21 @@ class Display extends Component {
             .then(response => {
                 const meals = response.data.meals;
                 var mealRows = [];
-
+                //gets all meals
                 meals.forEach((meal) => {
                     console.log(meal);
+                    //gets thumbnail
                     const thumbnail = meal.strMealThumb;
+                    //puts data into individual meal components
                     const eachMeal = <Meals meal={meal} thumbnail={thumbnail} key={meal.idMeal} />
                     console.log(eachMeal);
+                    //put all meals into an array
                     mealRows.push(<Grid item xs={2} key={meal.idMeal}>
                         {eachMeal}
                     </Grid>)
                 })
                 console.log(mealRows);
+                //puts all meals as state
                 this.setState({ rows: mealRows });
             })
             .catch(err => {

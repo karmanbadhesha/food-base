@@ -41,7 +41,7 @@ function Search(props) {
     }
 
     useEffect(() => {
-
+        //when drop down value is set by user, get the API to deliver the results
         if (value === 'category') {
             const url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list";
             axios.get(url)
