@@ -7,9 +7,30 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        padding: '2px'
+    },
+    paper: {
+        textAlign: 'center',
+        color: 'black'
+    },
+    grid: {
+        marginTop: "10px",
+        marginLeft: "10px",
+    },
+    box: {
+        alignContent: "center"
+    }
+}));
 
 function Search(props) {
+    const classes = useStyles();
     const { searchHandler } = props;
     const textInput = useRef(null);
     const [value, setValue] = useState('name');
@@ -63,7 +84,7 @@ function Search(props) {
 
     return (
 
-        <div>
+        <div className={classes.root}>
             <FormControl component="fieldset">
                 <FormLabel component="legend">Search Type</FormLabel>
                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleRadio} row>
@@ -75,7 +96,7 @@ function Search(props) {
                 </RadioGroup>
             </FormControl>
 
-
+            <br />
             {(() => {
                 switch (value) {
                     //different user input based on what type of search they will be doing
@@ -100,6 +121,10 @@ function Search(props) {
                             id="searchLetter"
                             label="Search for meal by first letter"
                             ref={textInput}
+                            style={
+                                { width: 250 }
+                            }
+                            inputProps={{ maxLength: 1 }}
                             onChange={(event) => {
                                 let payload = {
                                     "value": event.target.value,
@@ -112,7 +137,8 @@ function Search(props) {
                     case "category": return (
 
                         <Autocomplete
-                            id="combo-box-demo"
+                            id="Category"
+                            className={classes.box}
                             options={data}
                             getOptionLabel={(data) => data.strCategory}
                             onChange={(event) => {
@@ -123,13 +149,15 @@ function Search(props) {
                                 searchHandler(payload);
                             }}
                             style={{ width: 300 }}
-                            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                            renderInput={(params) => <TextField {...params} label="Category" variant="outlined" />}
                         />
                     );
                     case "area": return (
 
                         <Autocomplete
-                            id="combo-box-demo"
+                            id="Area"
+                            className={classes.box}
+
                             options={data}
                             getOptionLabel={(data) => data.strArea}
                             style={{ width: 300 }}
@@ -140,13 +168,15 @@ function Search(props) {
                                 }
                                 searchHandler(payload);
                             }}
-                            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                            renderInput={(params) => <TextField {...params} label="Area" variant="outlined" />}
                         />
                     );
                     case "ingredients": return (
 
                         <Autocomplete
-                            id="combo-box-demo"
+                            id="Ingredients"
+                            className={classes.box}
+
                             options={data}
                             getOptionLabel={(data) => data.strIngredient}
                             style={{ width: 300 }}
@@ -157,14 +187,23 @@ function Search(props) {
                                 }
                                 searchHandler(payload);
                             }}
-                            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                            renderInput={(params) => <TextField {...params} label="Ingredients" variant="outlined" />}
                         />
                     );
                     default: return (
-
-                        <p>test4</p>
+                        <TextField
+                            id="searchName"
+                            label="Search for meal by name"
+                            ref={textInput}
+                            onChange={(event) => {
+                                let payload = {
+                                    "value": event.target.value,
+                                    "type": "searchName"
+                                }
+                                searchHandler(payload);
+                            }}
+                        />
                     );
-
                 }
             })()}
 

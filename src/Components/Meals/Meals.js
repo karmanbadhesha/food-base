@@ -84,10 +84,6 @@ function Meals(props) {
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.meal.strInstructions}
                     </Typography>
-                    <Typography variant="h6">Rating</Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {props.movie.vote_average}
-                    </Typography>
                 </CardContent>
             </Collapse>
         </Card>

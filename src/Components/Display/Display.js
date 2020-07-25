@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { Search, Meals } from '../../Components';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 
+
+
+const useStyles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        textAlign: 'center',
+        color: 'black'
+    },
+    grid: {
+        marginTop: "10px",
+        marginLeft: "10px",
+    }
+});
 
 class Display extends Component {
     constructor(props) {
@@ -18,6 +35,13 @@ class Display extends Component {
         this.setState({
             search: e
         }, this.search)
+    }
+
+    //clears rows
+    clearRow = (e) => {
+        this.setState({
+            rows: ''
+        });
     }
 
     search() {
@@ -63,9 +87,12 @@ class Display extends Component {
 
 
     render() {
+        const classes = useStyles();
+
         return (
-            <div>
+            <div className={classes.root}>
                 <Search searchHandler={this.searchHandler} searchType={this.searchType} />
+                <Button variant="outlined" color="primary" onClick={this.clearRow}>Clear</Button>
                 <Grid container spacing={1}>
                     {this.state.rows}
                 </Grid >
