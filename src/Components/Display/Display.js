@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Search, Meals } from '../../Components';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';

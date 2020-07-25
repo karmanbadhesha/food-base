@@ -18,6 +18,7 @@ function Header() {
                     </tr>
                 </tbody>
             </table>
+            <p>To use this app, simply select the type of search you wish to conduct and type into the search field, or select a value from the drop down.</p>
         </div>
     );
 
